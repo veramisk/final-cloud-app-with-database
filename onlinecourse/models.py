@@ -48,7 +48,7 @@ class Learner(models.Model):
     social_link = models.URLField(max_length=200)
 
     def __str__(self):
-         return self.user.username + "," + \
+        return self.user.username + "," + \
                self.occupation
 
 
@@ -107,11 +107,11 @@ class Enrollment(models.Model):
     # question grade/mark
 class Question(models.Model):
     course = models.ForeignKey(Course, on_delete=models.CASCADE,default="")
-    content = models.CharField(max_length=200,default="")
+    text = models.CharField(max_length=200,default="")
     grade = models.IntegerField(default=50)
 
     def __str__(self):
-        return "Question: " + self.content
+        return "Question: " + self.text
 
 # <HINT> A sample model method to calculate if learner get the score of the question
 #def is_get_score(self, selected_ids):
@@ -139,10 +139,12 @@ class Question(models.Model):
 # class Choice(models.Model):
 class Choice(models.Model):
     question = models.ForeignKey(Question, on_delete=models.CASCADE,default="")
-    content = models.CharField(max_length=200,default="")
+    text = models.CharField(max_length=200,default="")
     is_correct = models.BooleanField(default=False) 
    
- 
+    def __str__(self):
+        return "Choice: " + self.text
+
 # <HINT> The submission model
 # One enrollment could have multiple submission
 # One submission could have multiple choices
